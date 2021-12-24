@@ -44,10 +44,7 @@ namespace OxyPlot.Blazor
 
         public int SequenceNumber { get; set; }
 
-        /// <summary>
-        /// Sets the tooltip for the next element
-        /// </summary>
-        /// <param name="text"></param>
+        /// <inheritdoc>
         public override void SetToolTip(string text)
         {
             title = text;
@@ -569,27 +566,13 @@ namespace OxyPlot.Blazor
         /// </summary>
         public bool UseVerticalTextAlignmentWorkaround { get; set; }
 
-        /// <summary>
-        /// Draws an ellipse.
-        /// </summary>
-        /// <param name="rect">The rectangle.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The thickness.</param>
+        /// <inheritdoc>
         public override void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             this.WriteEllipse(rect.Left, rect.Top, rect.Width, rect.Height, this.CreateStyle(fill, stroke, thickness));
         }
 
-        /// <summary>
-        /// Draws the polyline from the specified points.
-        /// </summary>
-        /// <param name="points">The points.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The stroke thickness.</param>
-        /// <param name="dashArray">The dash array.</param>
-        /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
+        /// <inheritdoc>
         public override void DrawLine(
             IList<ScreenPoint> points,
             OxyColor stroke,
@@ -601,16 +584,7 @@ namespace OxyPlot.Blazor
             this.WritePolyline(points, this.CreateStyle(OxyColors.Undefined, stroke, thickness, dashArray, lineJoin));
         }
 
-        /// <summary>
-        /// Draws the polygon from the specified points. The polygon can have stroke and/or fill.
-        /// </summary>
-        /// <param name="points">The points.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The stroke thickness.</param>
-        /// <param name="dashArray">The dash array.</param>
-        /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
+        /// <inheritdoc>
         public override void DrawPolygon(
             IList<ScreenPoint> points,
             OxyColor fill,
@@ -623,31 +597,13 @@ namespace OxyPlot.Blazor
             this.WritePolygon(points, this.CreateStyle(fill, stroke, thickness, dashArray, lineJoin));
         }
 
-        /// <summary>
-        /// Draws the rectangle.
-        /// </summary>
-        /// <param name="rect">The rectangle.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The stroke thickness.</param>
+        /// <inheritdoc>
         public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             this.WriteRectangle(rect.Left, rect.Top, rect.Width, rect.Height, this.CreateStyle(fill, stroke, thickness));
         }
 
-        /// <summary>
-        /// Draws the text.
-        /// </summary>
-        /// <param name="p">The p.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="c">The c.</param>
-        /// <param name="fontFamily">The font family.</param>
-        /// <param name="fontSize">Size of the font.</param>
-        /// <param name="fontWeight">The font weight.</param>
-        /// <param name="rotate">The rotate.</param>
-        /// <param name="halign">The horizontal alignment.</param>
-        /// <param name="valign">The vertical alignment.</param>
-        /// <param name="maxSize">Size of the max.</param>
+        /// <inheritdoc>
         public override void DrawText(
             ScreenPoint p,
             string text,
@@ -713,14 +669,7 @@ namespace OxyPlot.Blazor
             }
         }
 
-        /// <summary>
-        /// Measures the text.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        /// <param name="fontFamily">The font family.</param>
-        /// <param name="fontSize">Size of the font.</param>
-        /// <param name="fontWeight">The font weight.</param>
-        /// <returns>The text size.</returns>
+        /// <inheritdoc>
         public override OxySize MeasureText(string text, string fontFamily, double fontSize, double fontWeight)
         {
             if (string.IsNullOrEmpty(text))
@@ -731,20 +680,7 @@ namespace OxyPlot.Blazor
             return this.TextMeasurer.MeasureText(text, fontFamily, fontSize, fontWeight);
         }
 
-        /// <summary>
-        /// Draws the specified portion of the specified <see cref="OxyImage" /> at the specified location and with the specified size.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="srcX">The x-coordinate of the upper-left corner of the portion of the source image to draw.</param>
-        /// <param name="srcY">The y-coordinate of the upper-left corner of the portion of the source image to draw.</param>
-        /// <param name="srcWidth">Width of the portion of the source image to draw.</param>
-        /// <param name="srcHeight">Height of the portion of the source image to draw.</param>
-        /// <param name="destX">The x-coordinate of the upper-left corner of drawn image.</param>
-        /// <param name="destY">The y-coordinate of the upper-left corner of drawn image.</param>
-        /// <param name="destWidth">The width of the drawn image.</param>
-        /// <param name="destHeight">The height of the drawn image.</param>
-        /// <param name="opacity">The opacity.</param>
-        /// <param name="interpolate">Interpolate if set to <c>true</c>.</param>
+        /// <inheritdoc>
         public override void DrawImage(
             OxyImage source,
             double srcX,
