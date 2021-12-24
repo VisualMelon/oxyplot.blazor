@@ -309,16 +309,16 @@ namespace OxyPlot.Blazor
                     renderer.SequenceNumber = 11;
                     if (model.Background != OxyColors.Transparent)
                     {
-                        renderer.FillRectangle(OxyRect.Create(0, 0, _svgPos.Width, _svgPos.Height), model.Background);
+                        renderer.FillRectangle(OxyRect.Create(0, 0, _svgPos.Width, _svgPos.Height), model.Background, EdgeRenderingMode.PreferSharpness);
                     }
                     renderer.SequenceNumber = 10;
-                    model.Render(renderer, _svgPos.Width, _svgPos.Height);
+                    model.Render(renderer, new OxyRect(0, 0, _svgPos.Width, _svgPos.Height));
                 }
                 // zoom rectangle
                 if (this.zoomRectangle.Width > 0 || this.zoomRectangle.Height > 0)
                 {
                     renderer.SequenceNumber = 15;
-                    renderer.DrawRectangle(zoomRectangle, OxyColor.FromArgb(0x40, 0xFF, 0xFF, 0x00), OxyColors.Black, 0.5);
+                    renderer.DrawRectangle(zoomRectangle, OxyColor.FromArgb(0x40, 0xFF, 0xFF, 0x00), OxyColors.Black, 0.5, EdgeRenderingMode.PreferSharpness);
                 }
                 // tracker
                 if (_tracker != null && _trackerEnabled)
@@ -326,8 +326,8 @@ namespace OxyPlot.Blazor
                     renderer.SequenceNumber = 20;
                     var s = renderer.MeasureText(_tracker.Text, null, 10, 400);
                     var r = new OxyRect(_tracker.Position, s).Inflate(50, 5).Offset(20, 0);
-                    renderer.FillRectangle(r, currentModel.LegendBackground);
-                    renderer.DrawMultilineText(_tracker.Position, _tracker.Text, currentModel.LegendTextColor);
+                    renderer.FillRectangle(r, currentModel.PlotAreaBackground, EdgeRenderingMode.PreferSharpness);
+                    renderer.DrawMultilineText(_tracker.Position, _tracker.Text, currentModel.TextColor);
                 }
             }
             builder.CloseElement();

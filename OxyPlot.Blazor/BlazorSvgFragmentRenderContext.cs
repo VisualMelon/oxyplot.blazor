@@ -172,6 +172,25 @@ namespace OxyPlot.Blazor
             this.WriteEndElement();
         }
 
+        private int _clipCount = 0;
+
+        /// <inheritdoc/>
+        public override int ClipCount => _clipCount;
+
+        /// <inheritdoc/>
+        public override void PushClip(OxyRect clippingRectangle)
+        {
+            BeginClip(clippingRectangle.Left, clippingRectangle.Top, clippingRectangle.Width, clippingRectangle.Height);
+            _clipCount++;
+        }
+
+        /// <inheritdoc/>
+        public override void PopClip()
+        {
+            EndClip();
+            _clipCount--;
+        }
+
         /// <summary>
         /// Sets a clipping rectangle.
         /// </summary>
@@ -557,7 +576,7 @@ namespace OxyPlot.Blazor
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The thickness.</param>
-        public override void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness)
+        public override void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             this.WriteEllipse(rect.Left, rect.Top, rect.Width, rect.Height, this.CreateStyle(fill, stroke, thickness));
         }
@@ -575,9 +594,9 @@ namespace OxyPlot.Blazor
             IList<ScreenPoint> points,
             OxyColor stroke,
             double thickness,
+            EdgeRenderingMode edgeRenderingMode,
             double[] dashArray,
-            LineJoin lineJoin,
-            bool aliased)
+            LineJoin lineJoin)
         {
             this.WritePolyline(points, this.CreateStyle(OxyColors.Undefined, stroke, thickness, dashArray, lineJoin));
         }
@@ -597,9 +616,9 @@ namespace OxyPlot.Blazor
             OxyColor fill,
             OxyColor stroke,
             double thickness,
+            EdgeRenderingMode edgeRenderingMode,
             double[] dashArray,
-            LineJoin lineJoin,
-            bool aliased)
+            LineJoin lineJoin)
         {
             this.WritePolygon(points, this.CreateStyle(fill, stroke, thickness, dashArray, lineJoin));
         }
@@ -611,7 +630,7 @@ namespace OxyPlot.Blazor
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The stroke thickness.</param>
-        public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness)
+        public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             this.WriteRectangle(rect.Left, rect.Top, rect.Width, rect.Height, this.CreateStyle(fill, stroke, thickness));
         }
